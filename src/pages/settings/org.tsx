@@ -28,7 +28,7 @@ export function OrgSettingsPage() {
   const { data: org, isLoading } = useCurrentOrg()
   const qc = useQueryClient()
 
-  const { register, handleSubmit, setValue, reset, formState: { errors, isSubmitting, isDirty } } = useForm<OrgValues>({
+  const { register, handleSubmit, setValue, watch, reset, formState: { errors, isSubmitting, isDirty } } = useForm<OrgValues>({
     resolver: zodResolver(orgSchema),
   })
 
@@ -93,7 +93,7 @@ export function OrgSettingsPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Industry</Label>
-                <Select value={org?.industry ?? ''} onValueChange={v => setValue('industry', v, { shouldDirty: true })}>
+                <Select value={watch('industry') ?? ''} onValueChange={v => setValue('industry', v, { shouldDirty: true })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     {['Manufacturing','IT Services','Pharma','FMCG','Energy','Financial Services','Mining','Construction','Telecom','Other'].map(i => (
@@ -104,7 +104,7 @@ export function OrgSettingsPage() {
               </div>
               <div className="space-y-2">
                 <Label>Sector</Label>
-                <Select value={org?.sector ?? ''} onValueChange={v => setValue('sector', v, { shouldDirty: true })}>
+                <Select value={watch('sector') ?? ''} onValueChange={v => setValue('sector', v, { shouldDirty: true })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     {['Private','PSU','MNC'].map(s => (
@@ -117,7 +117,7 @@ export function OrgSettingsPage() {
 
             <div className="space-y-2">
               <Label>Listed on</Label>
-              <Select value={org?.listed_on ?? ''} onValueChange={v => setValue('listed_on', v, { shouldDirty: true })}>
+              <Select value={watch('listed_on') ?? ''} onValueChange={v => setValue('listed_on', v, { shouldDirty: true })}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {['NSE','BSE','Both','Unlisted'].map(e => (

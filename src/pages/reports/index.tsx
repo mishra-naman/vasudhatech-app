@@ -60,7 +60,6 @@ function ReportStats({ responses }: { responses: ReportResponse[] }) {
   const approved  = responses.filter(r => r.status === 'approved').length
   const submitted = responses.filter(r => r.status === 'submitted').length
   const draft     = responses.filter(r => r.status === 'draft').length
-  const pct       = total > 0 ? Math.round((approved / total) * 100) : 0
 
   return (
     <div className="grid grid-cols-4 gap-3 mt-4">

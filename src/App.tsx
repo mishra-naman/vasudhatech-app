@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-rou
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 import { AuthProvider, useAuth } from '@/lib/hooks/useAuth'
+import { ThemeProvider } from '@/lib/hooks/useTheme'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,8 +38,18 @@ function PageLoader() {
   )
 }
 
+// Whether the user belongs to an org. This is fundamentally a profile fact,
+// so we fall back to profile.org_id when the JWT claim hasn't landed yet
+// (stale token, or the moment right after onboarding/hook-enable). isLoading
+// only clears after the profile fetch, so profile is populated here.
+function useHasOrg() {
+  const { orgId, profile } = useAuth()
+  return !!(orgId ?? profile?.org_id)
+}
+
 function ProtectedRoute() {
-  const { isLoading, isAuthenticated, orgId } = useAuth()
+  const { isLoading, isAuthenticated } = useAuth()
+  const hasOrg = useHasOrg()
 
   if (isLoading) {
     return (
@@ -48,12 +59,13 @@ function ProtectedRoute() {
     )
   }
   if (!isAuthenticated) return <Navigate to="/login" replace />
-  if (!orgId) return <Navigate to="/onboarding" replace />
+  if (!hasOrg) return <Navigate to="/onboarding" replace />
   return <Outlet />
 }
 
 function OnboardingRoute() {
-  const { isLoading, isAuthenticated, orgId } = useAuth()
+  const { isLoading, isAuthenticated } = useAuth()
+  const hasOrg = useHasOrg()
 
   if (isLoading) {
     return (
@@ -63,13 +75,37 @@ function OnboardingRoute() {
     )
   }
   if (!isAuthenticated) return <Navigate to="/login" replace />
-  if (orgId) return <Navigate to="/dashboard" replace />
+  if (hasOrg) return <Navigate to="/dashboard" replace />
+  return <Outlet />
+}
+
+// Guards the public auth pages (login/signup). Once authenticated, the user
+// is pushed into the app — to the dashboard if they have an org, otherwise
+// to onboarding. Without this, a successful login leaves the user stranded
+// on /login because nothing redirects them away.
+function AuthRoute() {
+  const { isLoading, isAuthenticated } = useAuth()
+  const hasOrg = useHasOrg()
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
+  }
+  if (isAuthenticated) return <Navigate to={hasOrg ? '/dashboard' : '/onboarding'} replace />
   return <Outlet />
 }
 
 const router = createBrowserRouter([
-  { path: '/login', element: <Suspense fallback={<PageLoader />}><Login /></Suspense> },
-  { path: '/signup', element: <Suspense fallback={<PageLoader />}><Signup /></Suspense> },
+  {
+    element: <AuthRoute />,
+    children: [
+      { path: '/login', element: <Suspense fallback={<PageLoader />}><Login /></Suspense> },
+      { path: '/signup', element: <Suspense fallback={<PageLoader />}><Signup /></Suspense> },
+    ],
+  },
   { path: '/invite', element: <Suspense fallback={<PageLoader />}><InviteAccept /></Suspense> },
   {
     path: '/onboarding',
@@ -107,11 +143,13 @@ const router = createBrowserRouter([
 
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster richColors position="top-right" />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <Toaster richColors position="top-right" />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   )
 }

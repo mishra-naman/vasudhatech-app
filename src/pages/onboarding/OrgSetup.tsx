@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { toast } from 'sonner'
 import { CheckCircle2, ChevronRight, Building2, BarChart3, Users, Rocket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -398,7 +398,7 @@ function Step4({
 // ─── Main wizard ─────────────────────────────────────────────────────────────
 
 export function OrgSetupPage() {
-  const { refreshSession } = useAuth()
+  const { refreshSession, profile } = useAuth()
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [orgData, setOrgData] = useState<OrgData | null>(null)
@@ -412,7 +412,18 @@ export function OrgSetupPage() {
     if (!orgData) return
     setIsSubmitting(true)
     try {
-      const { data, error } = await supabase.rpc('create_org_for_user', {
+      // Already onboarded: the org exists in the DB but the JWT lacked the
+      // org_id claim, so the router sent us here by mistake. Re-creating would
+      // trip the RPC's guard, so refresh the token (to pick up org_id) and go
+      // straight to the dashboard.
+      if (profile?.org_id) {
+        await refreshSession()
+        toast.message('Your organisation is already set up.')
+        navigate('/dashboard', { replace: true })
+        return
+      }
+
+      const { error } = await supabase.rpc('create_org_for_user', {
         p_org_name:      orgData.name,
         p_industry:      orgData.industry,
         p_sector:        orgData.sector,
@@ -431,7 +442,16 @@ export function OrgSetupPage() {
       toast.success(`Welcome aboard! ${orgData.name} is ready.`)
       navigate('/dashboard', { replace: true })
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : 'Setup failed')
+      const message = err instanceof Error ? err.message : 'Setup failed'
+      // Belt-and-suspenders: the RPC guard fired because an org already exists.
+      // Recover gracefully instead of showing a raw P0001 error.
+      if (message.includes('already has an organisation')) {
+        await refreshSession()
+        toast.message('Your organisation is already set up.')
+        navigate('/dashboard', { replace: true })
+        return
+      }
+      toast.error(message)
     } finally {
       setIsSubmitting(false)
     }

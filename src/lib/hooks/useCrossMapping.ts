@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import { useAuth } from './useAuth'
 
 // Find all questions sharing the same datapoint_key as the given question
 export function useLinkedQuestions(questionId: string | undefined) {
@@ -38,7 +37,6 @@ export function useLinkedQuestions(questionId: string | undefined) {
 
 // Auto-populate linked questions after a response is saved
 export function useAutoPopulate() {
-  const { orgId } = useAuth()
   const qc = useQueryClient()
 
   return useMutation({
@@ -57,7 +55,9 @@ export function useAutoPopulate() {
         p_source_question_id: questionId,
         p_period_id:          periodId,
         p_value:              value,
-        p_numeric_value:      numericValue,
+        // PG function handles NULL explicitly; type-gen types the arg as
+        // non-nullable, so cast to keep passing null through at runtime.
+        p_numeric_value:      numericValue as number,
       })
       if (error) throw error
       return (data as number) ?? 0

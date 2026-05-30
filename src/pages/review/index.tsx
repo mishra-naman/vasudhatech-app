@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
 import { CheckCircle2, XCircle, ClipboardList } from 'lucide-react'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -63,13 +62,13 @@ function ReviewSheet({
   const framework = principle.framework
 
   async function handleApprove() {
-    await approve.mutateAsync(response.id)
+    await approve.mutateAsync(response!.id)
     onClose()
   }
 
   async function handleReject() {
     if (!rejectReason.trim()) return
-    await reject.mutateAsync({ responseId: response.id, reason: rejectReason.trim() })
+    await reject.mutateAsync({ responseId: response!.id, reason: rejectReason.trim() })
     setShowRejectForm(false)
     setRejectReason('')
     onClose()

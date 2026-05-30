@@ -33,7 +33,7 @@ export function SignupPage() {
     try {
       await signup(values.email, values.password, values.fullName)
       toast.success('Account created! Check your email to confirm, or sign in if confirmation is disabled.')
-      // Navigation handled by onAuthStateChange in useAuth → ProtectedRoute → /onboarding
+      // If email confirmation is off, the session updates and AuthRoute redirects to /onboarding
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Sign up failed')
     }

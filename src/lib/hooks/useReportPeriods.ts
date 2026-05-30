@@ -93,7 +93,6 @@ export function useUpdatePeriodStatus() {
 
 export function useStartDataCollection() {
   const qc = useQueryClient()
-  const { orgId } = useAuth()
 
   return useMutation({
     mutationFn: async (periodId: string) => {

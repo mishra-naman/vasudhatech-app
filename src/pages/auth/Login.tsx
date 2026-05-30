@@ -27,7 +27,7 @@ export function LoginPage() {
   async function onSubmit(values: LoginFormValues) {
     try {
       await login(values.email, values.password)
-      // Navigation handled by ProtectedRoute in App.tsx
+      // Redirect handled by AuthRoute in App.tsx once the session updates
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Sign in failed')
     }

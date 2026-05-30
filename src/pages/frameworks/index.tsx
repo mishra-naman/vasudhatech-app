@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom'
-import { BarChart3, ChevronRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { AlertCircle, BarChart3, ChevronRight } from 'lucide-react'
+import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Switch } from '@/components/ui/switch'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useEnabledFrameworks } from '@/lib/hooks/useFrameworks'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { useFrameworksWithEnabled, useToggleFramework } from '@/lib/hooks/useFrameworks'
 
 const FRAMEWORK_COLORS: Record<string, string> = {
   BRSR: 'bg-orange-500',
@@ -24,47 +27,49 @@ const FRAMEWORK_DESCRIPTIONS: Record<string, string> = {
 }
 
 export function FrameworksPage() {
-  const { data: orgFrameworks = [], isLoading } = useEnabledFrameworks()
-
-  if (isLoading) {
-    return (
-      <div className="p-6">
-        <h1 className="text-2xl font-semibold mb-6">Frameworks</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[...Array(3)].map((_, i) => <Skeleton key={i} className="h-40 rounded-xl" />)}
-        </div>
-      </div>
-    )
-  }
-
-  if (orgFrameworks.length === 0) {
-    return (
-      <div className="p-6">
-        <h1 className="text-2xl font-semibold mb-6">Frameworks</h1>
-        <div className="flex flex-col items-center justify-center py-16 text-center">
-          <BarChart3 className="h-12 w-12 text-muted-foreground mb-4" />
-          <p className="text-lg font-medium mb-1">No frameworks enabled</p>
-          <p className="text-sm text-muted-foreground max-w-xs">
-            Enable frameworks in Settings to start collecting ESG data.
-          </p>
-        </div>
-      </div>
-    )
-  }
+  const { data: frameworks, isLoading, error } = useFrameworksWithEnabled()
+  const toggle = useToggleFramework()
+  const navigate = useNavigate()
 
   return (
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-semibold">Frameworks</h1>
         <p className="text-muted-foreground text-sm mt-1">
-          {orgFrameworks.length} framework{orgFrameworks.length !== 1 ? 's' : ''} enabled for your organisation
+          Browse every framework's principles, indicators and questions. Toggle the ones your
+          organisation reports against.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {orgFrameworks.map(({ framework: f }) => (
-          <Link key={f.id} to={`/frameworks/${f.id}`}>
-            <Card className="h-full hover:shadow-md transition-shadow cursor-pointer group">
+      {isLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => <Skeleton key={i} className="h-44 rounded-xl" />)}
+        </div>
+      ) : error ? (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Couldn't load frameworks</AlertTitle>
+          <AlertDescription>{error instanceof Error ? error.message : 'Please try again.'}</AlertDescription>
+        </Alert>
+      ) : frameworks.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <BarChart3 className="h-12 w-12 text-muted-foreground mb-4" />
+          <p className="text-lg font-medium mb-1">No frameworks available</p>
+          <p className="text-sm text-muted-foreground max-w-xs">
+            Reference data hasn't been seeded yet.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {frameworks.map(f => (
+            <Card
+              key={f.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => navigate(`/frameworks/${f.id}`)}
+              onKeyDown={e => { if (e.key === 'Enter') navigate(`/frameworks/${f.id}`) }}
+              className="h-full flex flex-col hover:shadow-md transition-shadow cursor-pointer group focus:outline-none focus:ring-2 focus:ring-ring"
+            >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className={`h-10 w-10 rounded-lg ${FRAMEWORK_COLORS[f.code] ?? 'bg-muted'} flex items-center justify-center mb-3`}>
@@ -72,27 +77,46 @@ export function FrameworksPage() {
                   </div>
                   <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors mt-1" />
                 </div>
-                <CardTitle className="text-base">{f.code}</CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="text-base">{f.code}</CardTitle>
+                  {f.enabled && <Badge className="text-[10px] px-1.5">Enabled</Badge>}
+                </div>
                 <CardDescription className="text-xs">{f.name}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="mt-auto">
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {FRAMEWORK_DESCRIPTIONS[f.code] ?? f.description ?? ''}
                 </p>
-                <div className="flex items-center gap-2 mt-3">
-                  {f.country && (
-                    <Badge variant="outline" className="text-[10px] px-1.5">{f.country}</Badge>
-                  )}
-                  {f.regulator && (
-                    <Badge variant="outline" className="text-[10px] px-1.5">{f.regulator}</Badge>
-                  )}
-                  <Badge variant="secondary" className="text-[10px] px-1.5">v{f.version}</Badge>
+                <div className="flex items-center justify-between mt-4">
+                  <div className="flex items-center gap-2">
+                    {f.country && <Badge variant="outline" className="text-[10px] px-1.5">{f.country}</Badge>}
+                    <Badge variant="secondary" className="text-[10px] px-1.5">v{f.version}</Badge>
+                  </div>
+                  {/* Stop click bubbling so toggling doesn't navigate into the framework */}
+                  <div
+                    className="flex items-center gap-2"
+                    onClick={e => e.stopPropagation()}
+                    onKeyDown={e => e.stopPropagation()}
+                  >
+                    <span className="text-[11px] text-muted-foreground">{f.enabled ? 'On' : 'Off'}</span>
+                    <Switch
+                      checked={f.enabled}
+                      disabled={toggle.isPending}
+                      onCheckedChange={(checked) => {
+                        toggle.mutate(
+                          { frameworkId: f.id, enable: checked },
+                          { onSuccess: () => toast.success(`${f.code} ${checked ? 'enabled' : 'disabled'}`) },
+                        )
+                      }}
+                      aria-label={`Toggle ${f.code}`}
+                    />
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          </Link>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

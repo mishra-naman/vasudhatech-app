@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CheckSquare, ChevronRight, ClipboardList } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -9,12 +8,7 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { useMyAssignments } from '@/lib/hooks/useAssignments'
 import { useReportPeriods } from '@/lib/hooks/useReportPeriods'
-import { useSubmitResponse } from '@/lib/hooks/useResponses'
 import type { AssignmentWithContext } from '@/lib/hooks/useAssignments'
-import type { Database } from '@/lib/types/database'
-
-type AssignmentStatus = Database['public']['Tables']['question_assignments']['Row']['status']
-type ResponseStatus   = Database['public']['Tables']['responses']['Row']['status']
 
 const STATUS_COLORS: Record<string, string> = {
   pending:     'bg-muted text-muted-foreground',
@@ -57,7 +51,6 @@ export function MyTasksPage() {
   const periodId = activePeriodId || periods[0]?.id
 
   const { data: assignments = [], isLoading: assignLoading } = useMyAssignments(periodId)
-  const submit = useSubmitResponse()
 
   const filtered = assignments.filter(a => matchesFilter(a, activeTab))
 

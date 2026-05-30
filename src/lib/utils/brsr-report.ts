@@ -28,7 +28,7 @@ function headerCell(text: string): TableCell {
   return cell(text, true, '#f1f5f9')
 }
 
-function principleTable(responses: ReportResponse[], principle: PrincipleRow): Content {
+function principleTable(responses: ReportResponse[]): Content {
   const essential  = responses.filter(r => r.question.indicator.category === 'essential')
   const leadership = responses.filter(r => r.question.indicator.category === 'leadership')
 
@@ -119,7 +119,7 @@ export function generateBRSRReport(
 
     for (const { principle, responses: ress } of items) {
       sections.push({ text: `${principle.code}: ${principle.name}`, style: 'principleHeader', margin: [0, 8, 0, 4] as [number, number, number, number] })
-      sections.push(principleTable(ress, principle))
+      sections.push(principleTable(ress))
     }
   }
 

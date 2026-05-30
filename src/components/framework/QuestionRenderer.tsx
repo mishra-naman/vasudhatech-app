@@ -28,6 +28,7 @@ function FieldWrapper({
   unit,
   required,
   assurable,
+  showMeta = true,
   children,
 }: {
   label: string
@@ -35,6 +36,7 @@ function FieldWrapper({
   unit?: string | null
   required?: boolean
   assurable?: boolean
+  showMeta?: boolean
   children: React.ReactNode
 }) {
   return (
@@ -44,15 +46,21 @@ function FieldWrapper({
           {label}
           {required && <span className="text-destructive ml-0.5">*</span>}
         </Label>
-        <div className="flex items-center gap-1 shrink-0">
-          {unit && <Badge variant="outline" className="text-[10px] px-1.5">{unit}</Badge>}
-          {assurable && <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500" title="Assurable KPI" />}
-          {helpText && (
-            <span title={helpText}>
-              <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
-            </span>
-          )}
-        </div>
+        {showMeta && (
+          <div className="flex items-center gap-1 shrink-0">
+            {unit && <Badge variant="outline" className="text-[10px] px-1.5">{unit}</Badge>}
+            {assurable && (
+              <span title="Assurable KPI">
+                <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500" />
+              </span>
+            )}
+            {helpText && (
+              <span title={helpText}>
+                <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+              </span>
+            )}
+          </div>
+        )}
       </div>
       {children}
     </div>
@@ -75,6 +83,7 @@ export function QuestionRenderer<T extends FieldValues>({
     unit,
     required: q.is_required ?? false,
     assurable: q.is_assurable ?? false,
+    showMeta,
   }
 
   const responseType = q.response_type ?? 'text'

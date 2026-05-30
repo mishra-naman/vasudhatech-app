@@ -118,7 +118,7 @@ function DeptProgressChart({ depts }: { depts: DeptStat[] }) {
         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
         <XAxis type="number" domain={[0, 100]} tickFormatter={v => `${v}%`} tick={{ fontSize: 11 }} />
         <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={90} />
-        <Tooltip formatter={(v: number) => [`${v}%`, 'Completion']} />
+        <Tooltip formatter={(v) => [`${v}%`, 'Completion']} />
         <Bar dataKey="pct" fill="#10b981" radius={[0, 4, 4, 0]} maxBarSize={24} />
       </BarChart>
     </ResponsiveContainer>

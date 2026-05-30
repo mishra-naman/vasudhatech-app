@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Drive the `dark:` variant off a `.dark` class on <html> (set by ThemeProvider),
+   instead of the OS `prefers-color-scheme` default. */
+@custom-variant dark (&:is(.dark *));
+
 /* Bridge shadcn/ui CSS variables → Tailwind v4 theme tokens.
    The `inline` keyword tells Tailwind to resolve these at runtime via the browser,
    so hsl(var(--border)) etc. are left as CSS custom-property references. */

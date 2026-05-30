@@ -4,7 +4,6 @@ import { ArrowLeft, ChevronDown, ChevronRight, HelpCircle, Star } from 'lucide-r
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { cn } from '@/lib/utils'
 import { useFramework, useIndicators, usePrinciple, useQuestions } from '@/lib/hooks/useFrameworks'
 import type { Database } from '@/lib/types/database'
 
@@ -49,7 +48,9 @@ function QuestionRow({ q }: { q: QuestionRow }) {
           {RESPONSE_TYPE_ICONS[q.response_type ?? 'text'] ?? '?'}
         </span>
         {q.is_assurable && (
-          <Star className="h-3 w-3 text-amber-500 fill-amber-500" title="Assurable KPI" />
+          <span title="Assurable KPI">
+            <Star className="h-3 w-3 text-amber-500 fill-amber-500" />
+          </span>
         )}
         {q.default_dept && (
           <Badge variant="outline" className="text-[9px] px-1 py-0">{q.default_dept}</Badge>

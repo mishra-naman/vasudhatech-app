@@ -94,12 +94,14 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
 
         {showSettings && (
           <>
-            <div className="pt-4 pb-1 px-3">
-              <span className="flex items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                <Settings className="h-3 w-3" />
-                Settings
-              </span>
-            </div>
+            <NavLink
+              to={visibleSettings[0].href}
+              onClick={onNavClick}
+              className="mt-4 mb-1 flex items-center gap-2 px-3 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider transition-colors hover:text-foreground"
+            >
+              <Settings className="h-3 w-3" />
+              Settings
+            </NavLink>
             {visibleSettings.map(item => (
               <LinkItem key={item.href} href={item.href} icon={item.icon} label={item.label} onClick={onNavClick} />
             ))}

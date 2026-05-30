@@ -14,6 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useAuth } from '@/lib/hooks/useAuth'
 import { useCurrentOrg } from '@/lib/hooks/useOrg'
 import { NotificationBell } from './NotificationBell'
+import { ThemeToggle } from './ThemeToggle'
 
 export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
   const { profile, logout } = useAuth()
@@ -53,6 +54,7 @@ export function TopBar({ onMenuClick }: { onMenuClick?: () => void }) {
 
       {/* Right actions */}
       <div className="flex items-center gap-1">
+        <ThemeToggle />
         <NotificationBell />
 
         <DropdownMenu>

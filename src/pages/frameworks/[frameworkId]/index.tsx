@@ -1,9 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
-import { ChevronRight, ArrowLeft, Layers } from 'lucide-react'
+import { ChevronRight, ArrowLeft, Layers, AlertCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useFramework, usePrinciples } from '@/lib/hooks/useFrameworks'
 
 const SECTION_COLORS: Record<string, string> = {
@@ -15,7 +16,7 @@ const SECTION_COLORS: Record<string, string> = {
 export function FrameworkDetailPage() {
   const { frameworkId } = useParams<{ frameworkId: string }>()
   const { data: framework, isLoading: fwLoading } = useFramework(frameworkId)
-  const { data: principles = [], isLoading: pLoading } = usePrinciples(frameworkId)
+  const { data: principles = [], isLoading: pLoading, error: pError } = usePrinciples(frameworkId)
 
   const isLoading = fwLoading || pLoading
 
@@ -51,6 +52,12 @@ export function FrameworkDetailPage() {
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-16 rounded-lg" />)}
         </div>
+      ) : pError ? (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Couldn't load principles</AlertTitle>
+          <AlertDescription>{pError instanceof Error ? pError.message : 'Please try again.'}</AlertDescription>
+        </Alert>
       ) : principles.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <Layers className="h-10 w-10 text-muted-foreground mb-3" />

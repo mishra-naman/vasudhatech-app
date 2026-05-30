@@ -12,7 +12,6 @@ import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Textarea } from '@/components/ui/textarea'
 import { supabase } from '@/lib/supabase'
-import { useAuth } from '@/lib/hooks/useAuth'
 import { useActivePeriod, useReportPeriods } from '@/lib/hooks/useReportPeriods'
 import { useResponse, useSaveDraft, useSubmitResponse } from '@/lib/hooks/useResponses'
 import { useAutoPopulate, useLinkedQuestions } from '@/lib/hooks/useCrossMapping'
@@ -72,7 +71,6 @@ function useQuestionWithContext(questionId: string | undefined) {
 
 export function QuestionPage() {
   const { questionId } = useParams<{ questionId: string }>()
-  const { orgId } = useAuth()
 
   const { data: q, isLoading: qLoading }       = useQuestionWithContext(questionId)
   const { data: period }                        = useActivePeriod()

@@ -33,9 +33,14 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 function decodeJwtClaims(token: string): JwtClaims {
   try {
     const payload = token.split('.')[1]
-    // Fix base64url encoding (replace - with + and _ with /)
-    const fixed = payload.replace(/-/g, '+').replace(/_/g, '/')
-    return JSON.parse(atob(fixed)) as JwtClaims
+    if (!payload) return {}
+    // base64url → base64, then restore the padding atob needs
+    let b64 = payload.replace(/-/g, '+').replace(/_/g, '/')
+    if (b64.length % 4) b64 += '='.repeat(4 - (b64.length % 4))
+    // Decode as UTF-8 so non-ASCII claim values survive
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0))
+    const json = new TextDecoder().decode(bytes)
+    return JSON.parse(json) as JwtClaims
   } catch {
     return {}
   }
@@ -65,6 +70,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
   // Prevent concurrent profile fetches on rapid session changes
   const fetchingRef = useRef(false)
+  // Ensures the self-heal refresh below runs at most once per session,
+  // so a disabled access-token hook can't trigger an infinite refresh loop.
+  const healedRef = useRef(false)
 
   const handleSession = useCallback(async (newSession: Session | null) => {
     setSession(newSession)
@@ -75,6 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setOrgId(null)
       setUserRole(null)
       setDeptId(null)
+      healedRef.current = false
       return
     }
 
@@ -90,6 +99,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const p = await fetchProfile(newSession.user.id)
     fetchingRef.current = false
     setProfile(p)
+
+    // Self-heal a stale token: the profile is linked to an org but the JWT
+    // carries no org_id claim. This happens when the token was issued before
+    // onboarding finished, or right after the access-token hook is enabled.
+    // Refresh once to re-run the hook and pick up the claim — onAuthStateChange
+    // fires again with the fresh token. Guarded so a disabled hook (which will
+    // never inject the claim) can't loop forever.
+    if (!claims.org_id && p?.org_id && !healedRef.current) {
+      healedRef.current = true
+      await supabase.auth.refreshSession()
+    }
   }, [])
 
   useEffect(() => {
@@ -135,9 +155,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     user,
     session,
     profile,
-    orgId,
-    userRole,
-    deptId,
+    // Prefer the JWT claims (needed for RLS), but fall back to the profile row
+    // so the UI (routing, role-gated nav) works even when the access-token hook
+    // hasn't injected claims yet — or at all. The profile is the source of truth
+    // for "which org / what role"; the JWT claim is an optimisation for RLS.
+    orgId: orgId ?? profile?.org_id ?? null,
+    userRole: userRole ?? ((profile?.role as UserRole | null) ?? null),
+    deptId: deptId ?? profile?.department_id ?? null,
     isLoading,
     isAuthenticated: !!user,
     login,

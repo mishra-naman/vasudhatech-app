@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       audit_logs: {
@@ -746,7 +721,31 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      auto_assign_questions: { Args: { p_period_id: string }; Returns: number }
+      auto_populate_linked_responses: {
+        Args: {
+          p_numeric_value: number
+          p_period_id: string
+          p_source_question_id: string
+          p_value: string
+        }
+        Returns: number
+      }
+      create_org_for_user: {
+        Args: {
+          p_departments: Json
+          p_fiscal_start: number
+          p_framework_ids: string[]
+          p_industry: string
+          p_listed_on: string
+          p_market_cap: string
+          p_org_name: string
+          p_sector: string
+        }
+        Returns: Json
+      }
       custom_access_token_hook: { Args: { event: Json }; Returns: Json }
+      get_dashboard_stats: { Args: { p_period_id: string }; Returns: Json }
       requesting_org_id: { Args: never; Returns: string }
       requesting_user_role: { Args: never; Returns: string }
     }
@@ -877,12 +876,7 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {},
   },
 } as const
-A new version of Supabase CLI is available: v2.102.0 (currently installed v2.101.0)
-We recommend updating regularly for new features and bug fixes: https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli
