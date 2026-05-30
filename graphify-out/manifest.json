@@ -1,0 +1,242 @@
+{
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\components.json": {
+    "mtime": 1780109214.71039,
+    "ast_hash": "2d914163b4e7aab92a4d7b2a65bc04ad",
+    "semantic_hash": "2d914163b4e7aab92a4d7b2a65bc04ad"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\eslint.config.js": {
+    "mtime": 1780108262.2382452,
+    "ast_hash": "0355276bc79439afe3c53e3a2470ca1e",
+    "semantic_hash": "0355276bc79439afe3c53e3a2470ca1e"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\package.json": {
+    "mtime": 1780109054.3187847,
+    "ast_hash": "a1edd1b7df3170752f4e67cec119e4c8",
+    "semantic_hash": "a1edd1b7df3170752f4e67cec119e4c8"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\tsconfig.app.json": {
+    "mtime": 1780108860.351947,
+    "ast_hash": "b8122c063dfe4473a2d3a1da5cee2aab",
+    "semantic_hash": "b8122c063dfe4473a2d3a1da5cee2aab"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\tsconfig.json": {
+    "mtime": 1780108262.340199,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\tsconfig.node.json": {
+    "mtime": 1780108262.3501787,
+    "ast_hash": "70bdd0a673bcfc0e828080b306e7c680",
+    "semantic_hash": "70bdd0a673bcfc0e828080b306e7c680"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\vite.config.ts": {
+    "mtime": 1780108855.2263212,
+    "ast_hash": "b47941ab072349ef9e80112d90834b67",
+    "semantic_hash": "b47941ab072349ef9e80112d90834b67"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\App.tsx": {
+    "mtime": 1780108262.643741,
+    "ast_hash": "c5e44a49ac2a44373fba5d1a7fe35be4",
+    "semantic_hash": "c5e44a49ac2a44373fba5d1a7fe35be4"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\main.tsx": {
+    "mtime": 1780108262.6554842,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\accordion.tsx": {
+    "mtime": 1780109059.5966518,
+    "ast_hash": "9fa141d383e900bc92f1a78b203bc378",
+    "semantic_hash": "9fa141d383e900bc92f1a78b203bc378"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\avatar.tsx": {
+    "mtime": 1780109059.2964723,
+    "ast_hash": "889c4b2254dab57a71a8b620b65cca87",
+    "semantic_hash": "889c4b2254dab57a71a8b620b65cca87"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\badge.tsx": {
+    "mtime": 1780109058.9907732,
+    "ast_hash": "8510911fff59be294d64dbfc67f5c710",
+    "semantic_hash": "8510911fff59be294d64dbfc67f5c710"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\button.tsx": {
+    "mtime": 1780109057.2028637,
+    "ast_hash": "5eb5c23dfc552fe75b9beeffacede350",
+    "semantic_hash": "5eb5c23dfc552fe75b9beeffacede350"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\card.tsx": {
+    "mtime": 1780109058.3626144,
+    "ast_hash": "5f465338c9c83716fd67bba76b9852d4",
+    "semantic_hash": "5f465338c9c83716fd67bba76b9852d4"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\checkbox.tsx": {
+    "mtime": 1780109059.7557616,
+    "ast_hash": "8ab728d8b37af0d62855c63521e6aa5e",
+    "semantic_hash": "8ab728d8b37af0d62855c63521e6aa5e"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\command.tsx": {
+    "mtime": 1780109060.551469,
+    "ast_hash": "0fb528fb269684974d66ed609036cadf",
+    "semantic_hash": "0fb528fb269684974d66ed609036cadf"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\dialog.tsx": {
+    "mtime": 1780109058.5226688,
+    "ast_hash": "993a9ca4c90359250f452aadd3e2e28c",
+    "semantic_hash": "993a9ca4c90359250f452aadd3e2e28c"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\dropdown-menu.tsx": {
+    "mtime": 1780109059.4371324,
+    "ast_hash": "687ccb0d62020e2e0f9c1d894a825bd4",
+    "semantic_hash": "687ccb0d62020e2e0f9c1d894a825bd4"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\input.tsx": {
+    "mtime": 1780109057.4638457,
+    "ast_hash": "186052fef4d6a678824a3ac70ec3bdec",
+    "semantic_hash": "186052fef4d6a678824a3ac70ec3bdec"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\label.tsx": {
+    "mtime": 1780109057.6992118,
+    "ast_hash": "84c1875f4b045f280ff7e6947cab726b",
+    "semantic_hash": "84c1875f4b045f280ff7e6947cab726b"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\popover.tsx": {
+    "mtime": 1780109060.3912005,
+    "ast_hash": "61634f232c0fee4cab67d97f8140b5d8",
+    "semantic_hash": "61634f232c0fee4cab67d97f8140b5d8"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\progress.tsx": {
+    "mtime": 1780109060.236348,
+    "ast_hash": "ca99607c05ca0555bcb95eff552e64dc",
+    "semantic_hash": "ca99607c05ca0555bcb95eff552e64dc"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\radio-group.tsx": {
+    "mtime": 1780109059.9195328,
+    "ast_hash": "b5c19b38a1c0ba491325a04184f2ef45",
+    "semantic_hash": "b5c19b38a1c0ba491325a04184f2ef45"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\select.tsx": {
+    "mtime": 1780109057.893266,
+    "ast_hash": "8f59eda15860f917b57c8c427e6a6960",
+    "semantic_hash": "8f59eda15860f917b57c8c427e6a6960"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\separator.tsx": {
+    "mtime": 1780109059.1423824,
+    "ast_hash": "31309c8fad1e9a91db2a4bdfb4988b45",
+    "semantic_hash": "31309c8fad1e9a91db2a4bdfb4988b45"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\sheet.tsx": {
+    "mtime": 1780109058.6904702,
+    "ast_hash": "70f191fcbd262095ddd6afbcc8bbf99d",
+    "semantic_hash": "70f191fcbd262095ddd6afbcc8bbf99d"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\switch.tsx": {
+    "mtime": 1780109058.0497293,
+    "ast_hash": "087ecf042be8e20dcfdb89f95648e1df",
+    "semantic_hash": "087ecf042be8e20dcfdb89f95648e1df"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\table.tsx": {
+    "mtime": 1780109058.8474605,
+    "ast_hash": "5af6efe80913e67455e53ad2fecf7ca2",
+    "semantic_hash": "5af6efe80913e67455e53ad2fecf7ca2"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\tabs.tsx": {
+    "mtime": 1780109058.2042153,
+    "ast_hash": "3db2474e4c66b1e544bb514bf1024612",
+    "semantic_hash": "3db2474e4c66b1e544bb514bf1024612"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\components\\ui\\textarea.tsx": {
+    "mtime": 1780109060.0675857,
+    "ast_hash": "b068d08e701aefd6216234a763e3a2ef",
+    "semantic_hash": "b068d08e701aefd6216234a763e3a2ef"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\supabase.ts": {
+    "mtime": 1780109093.9433146,
+    "ast_hash": "7c6f360f2e4ae8d5537633d6cfd91346",
+    "semantic_hash": "7c6f360f2e4ae8d5537633d6cfd91346"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\utils.ts": {
+    "mtime": 1780108982.6534083,
+    "ast_hash": "9a4cc6f9f3155ffdc1fa7c2c097f6429",
+    "semantic_hash": "9a4cc6f9f3155ffdc1fa7c2c097f6429"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\hooks\\useAuth.ts": {
+    "mtime": 1780109110.833481,
+    "ast_hash": "8e1dc1379e4d923e40db09c5d7d0c5e2",
+    "semantic_hash": "8e1dc1379e4d923e40db09c5d7d0c5e2"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\hooks\\useOrg.ts": {
+    "mtime": 1780109118.1279447,
+    "ast_hash": "0c6bb3564dd67f84eef4ff274b9abf50",
+    "semantic_hash": "0c6bb3564dd67f84eef4ff274b9abf50"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\types\\database.ts": {
+    "mtime": 1780109106.2814233,
+    "ast_hash": "dbfecc6ebc53aa769e4eaefe7470e0d5",
+    "semantic_hash": "dbfecc6ebc53aa769e4eaefe7470e0d5"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\lib\\types\\enums.ts": {
+    "mtime": 1780109100.5362096,
+    "ast_hash": "c2a2ad1a16f16227e3128a1d0c939b89",
+    "semantic_hash": "c2a2ad1a16f16227e3128a1d0c939b89"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\CLAUDE.md": {
+    "mtime": 1780111663.9488323,
+    "ast_hash": "47754d1712a68b953f3b92bc6a8a73f1",
+    "semantic_hash": "47754d1712a68b953f3b92bc6a8a73f1"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\IMPLEMENTATION_PROMPT.md": {
+    "mtime": 1780111698.279589,
+    "ast_hash": "cdef708a603c3f98b2f64fd9a4f9b842",
+    "semantic_hash": "cdef708a603c3f98b2f64fd9a4f9b842"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\index.html": {
+    "mtime": 1780108262.9581003,
+    "ast_hash": "4c81b4baa78a8baffd055e71f8359e4d",
+    "semantic_hash": "4c81b4baa78a8baffd055e71f8359e4d"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\README.md": {
+    "mtime": 1780108262.3817966,
+    "ast_hash": "f6e3faf55d738cf2affe1b44195f27cf",
+    "semantic_hash": "f6e3faf55d738cf2affe1b44195f27cf"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\.claude\\commands\\checkpoint.md": {
+    "mtime": 1780109057.5156639,
+    "ast_hash": "ac834587ab0c4bbc3b9676596fe49486",
+    "semantic_hash": "ac834587ab0c4bbc3b9676596fe49486"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\.claude\\commands\\gen-types.md": {
+    "mtime": 1780109064.0966961,
+    "ast_hash": "71da71e52ffe5256c99fbb73c0af63cf",
+    "semantic_hash": "71da71e52ffe5256c99fbb73c0af63cf"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\.claude\\commands\\new-migration.md": {
+    "mtime": 1780109072.3080423,
+    "ast_hash": "88609664ec89c11bd2aa8e3145a7f2b1",
+    "semantic_hash": "88609664ec89c11bd2aa8e3145a7f2b1"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\public\\favicon.svg": {
+    "mtime": 1780108262.4773197,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\public\\icons.svg": {
+    "mtime": 1780108262.5203211,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\assets\\hero.png": {
+    "mtime": 1780108262.4238775,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\assets\\react.svg": {
+    "mtime": 1780108262.5612025,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "D:\\study\\dev\\vibecoding\\vasudhatech\\vasudhatech-app\\src\\assets\\vite.svg": {
+    "mtime": 1780108262.5935361,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  }
+}
