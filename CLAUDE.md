@@ -279,3 +279,46 @@ One response auto-populates linked questions across frameworks:
 - No AI features in MVP — architecture is AI-ready for later
 - Table response type uses free-form JSON in value field — formalize table_schema later
 - XBRL export deferred to post-MVP
+
+# Add this section to your existing CLAUDE.md under the progress tracker:
+
+---
+
+## Feature: Assignment + Data Entry + Progress Dashboard
+
+### Current status: NOT STARTED
+
+### Step 1: Assignment system — COMPLETE
+- [x] question_assignments table + RLS verified (table from migration 003; RLS resilient via migration 014)
+- [x] useAssignments hook — useAllAssignments, useMyAssignments, useDepartments, useAutoAssign (auto_assign_questions RPC), useUpdateAssignment (status/assignee/due_date/reassign-dept; partial-patch), useBulkReassign
+- [x] Assignments page (src/pages/assignments/index.tsx — period selector, auto-assign button, status stats, framework/dept/status filters, per-row reassign + due date, bulk reassign)
+- [ ] Assignment badges in framework browser — DEFERRED (nice-to-have)
+- [x] Sidebar link for cs_admin/super_admin (ListChecks icon)
+
+### Step 2: Dept POC data entry — NOT STARTED
+- [ ] useResponses hook (save draft, submit, previous year carry-forward)
+- [ ] My Tasks page (grouped by principle, status tabs, bulk submit)
+- [ ] Response form page (QuestionRenderer + evidence upload + notes)
+- [ ] Rejection handling (show reason, allow re-edit + resubmit)
+- [ ] File upload to Supabase Storage
+- [ ] Sidebar link for dept_poc
+
+### Step 3: Approval workflow — NOT STARTED
+- [ ] useReview hook (queue, approve, reject, bulk approve)
+- [ ] Review queue page (table + slide-over panel + bulk actions)
+- [ ] Approve/reject with comments
+- [ ] Audit logging on status changes
+- [ ] Sidebar link with pending count badge
+
+### Step 4: Progress dashboard — NOT STARTED
+- [ ] useDashboard hook (org progress, by framework, by dept, recent activity)
+- [ ] Executive dashboard (stat cards + donut charts + dept bars + activity feed)
+- [ ] Dept POC dashboard (own dept only)
+- [ ] Progress bars in framework browser (framework/principle/indicator levels)
+- [ ] Overdue items tracker
+- [ ] Realtime updates (or 30s polling fallback)
+
+**Checkpoint commit**: _not yet_
+
+### Known issues / decisions from this feature:
+- _none yet_

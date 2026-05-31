@@ -21,6 +21,7 @@ const Dashboard = lazy(() => import('./pages/dashboard/index').then(m => ({ defa
 const Frameworks = lazy(() => import('./pages/frameworks/index').then(m => ({ default: m.FrameworksPage })))
 const FrameworkDetail = lazy(() => import('./pages/frameworks/[frameworkId]/index').then(m => ({ default: m.FrameworkDetailPage })))
 const PrincipleDetail = lazy(() => import('./pages/frameworks/[frameworkId]/[principleId]').then(m => ({ default: m.PrincipleDetailPage })))
+const Assignments = lazy(() => import('./pages/assignments/index').then(m => ({ default: m.AssignmentsPage })))
 const MyTasks = lazy(() => import('./pages/collection/my-tasks').then(m => ({ default: m.MyTasksPage })))
 const QuestionPage = lazy(() => import('./pages/collection/[questionId]').then(m => ({ default: m.QuestionPage })))
 const Review = lazy(() => import('./pages/review/index').then(m => ({ default: m.ReviewPage })))
@@ -126,6 +127,7 @@ const router = createBrowserRouter([
           { path: 'frameworks', element: <Suspense fallback={<PageLoader />}><Frameworks /></Suspense> },
           { path: 'frameworks/:frameworkId', element: <Suspense fallback={<PageLoader />}><FrameworkDetail /></Suspense> },
           { path: 'frameworks/:frameworkId/:principleId', element: <Suspense fallback={<PageLoader />}><PrincipleDetail /></Suspense> },
+          { path: 'assignments', element: <Suspense fallback={<PageLoader />}><Assignments /></Suspense> },
           { path: 'collection/tasks', element: <Suspense fallback={<PageLoader />}><MyTasks /></Suspense> },
           { path: 'collection/:questionId', element: <Suspense fallback={<PageLoader />}><QuestionPage /></Suspense> },
           { path: 'review', element: <Suspense fallback={<PageLoader />}><Review /></Suspense> },

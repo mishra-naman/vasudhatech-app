@@ -3,6 +3,7 @@ import {
   BarChart3,
   CheckSquare,
   ClipboardList,
+  ListChecks,
   FileText,
   LayoutDashboard,
   Settings,
@@ -25,6 +26,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: 'all' },
   { label: 'Frameworks', href: '/frameworks', icon: BarChart3, roles: ['cs_admin', 'super_admin', 'auditor'] },
+  { label: 'Assignments', href: '/assignments', icon: ListChecks, roles: ['cs_admin', 'super_admin'] },
   { label: 'My Tasks', href: '/collection/tasks', icon: CheckSquare, roles: ['dept_poc'] },
   { label: 'Review Queue', href: '/review', icon: ClipboardList, roles: ['cs_admin', 'super_admin'] },
   { label: 'Reports', href: '/reports', icon: FileText, roles: ['cs_admin', 'super_admin', 'auditor'] },
